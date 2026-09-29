@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Finance Ledger — Vol. 1, Issue 1 · September 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1f2e; --ink-soft: #3d4657; --ink-muted: #6b7684;
+    --primary: #0066cc; --primary-light: #e6f0ff;
+    --paper: #ffffff; --paper-dark: #f5f7fa;
+    --white: #ffffff; --rule: #e0e6f0; --rule-heavy: #1a1f2e;
+    --green: #10b981; --red: #ef4444; --blue: #0066cc;
+    --gold: #f59e0b; --gold-light: #fef3e2;
+    --radius: 6px; --max: 820px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.65; padding-top: env(safe-area-inset-top,0px); padding-bottom: env(safe-area-inset-bottom,0px); font-weight: 400; }
+
+  /* TOPBAR */
+  .topbar { background: #1a1f2e; color: #6b7684; font-size: 12px; padding: 10px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid #e0e6f0; }
+  .topbar-links { display: flex; gap: 20px; }
+  .topbar-links a { color: #0066cc; font-size: 12px; text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .topbar-links a:hover { color: #0052a3; }
+
+  /* MASTHEAD */
+  .masthead { max-width: var(--max); margin: 0 auto; padding: 32px 24px 20px; text-align: center; border-bottom: 2px solid var(--rule); background: var(--paper); }
+  .masthead-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 12px; }
+  .masthead-name { font-family: 'Libre Baskerville', serif; font-size: clamp(42px,8vw,56px); font-weight: 700; line-height: 1.1; letter-spacing: -0.5px; color: var(--ink); }
+  .home-link { display: inline-block; text-decoration: none; cursor: pointer; transition: opacity .15s; }
+  .home-link:hover { opacity: .8; }
+  .home-link:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; border-radius: 2px; }
+  .masthead-name em { font-style: italic; color: var(--primary); }
+  .masthead-rule { border: none; border-top: 1px solid var(--rule); margin: 14px 0 12px; }
+  .masthead-meta { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--ink-muted); flex-wrap: wrap; gap: 8px; }
+  .masthead-badge { background: var(--primary); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 12px; border-radius: var(--radius); }
+
+  /* SHAREBAR */
+  .sharebar-wrap { background: var(--paper-dark); border-bottom: 1px solid var(--rule); }
+  .sharebar { max-width: var(--max); margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .sharebar-label { font-size: 12px; font-weight: 600; color: var(--ink-soft); }
+  .share-btn { font-size: 12px; font-weight: 600; padding: 6px 14px; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--white); color: var(--ink); cursor: pointer; transition: all 0.2s; }
+  .share-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+  .sub-form { display: flex; gap: 8px; margin-left: auto; }
+  .sub-form input { font-size: 13px; padding: 6px 12px; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--white); color: var(--ink); width: 180px; }
+  .sub-form button { font-size: 12px; font-weight: 600; padding: 6px 16px; background: var(--primary); color: white; border: none; border-radius: var(--radius); cursor: pointer; transition: background 0.2s; }
+  .sub-form button:hover { background: #0052a3; }
+
+  /* NAV */
+  .nav-wrap { border-bottom: 2px solid var(--rule); background: var(--paper); }
+  .nav-inner { max-width: var(--max); margin: 0 auto; padding: 0 24px; display: flex; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-item { font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; padding: 12px 16px; color: var(--ink-muted); cursor: pointer; white-space: nowrap; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all 0.2s; }
+  .nav-item:hover { color: var(--ink); }
+  .nav-item.on { color: var(--primary); border-bottom-color: var(--primary); }
+
+  /* MAIN */
+  .main { max-width: var(--max); margin: 0 auto; padding: 26px 20px 40px; }
+
+  /* SECTION */
+  .sec-head { display: flex; align-items: center; gap: 12px; margin: 32px 0 18px; }
+  .sec-head:first-child { margin-top: 0; }
+  .sec-head-text { font-family: 'Libre Baskerville', serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; white-space: nowrap; color: var(--ink); }
+  .sec-head-line { flex: 1; height: 1px; background: var(--rule-heavy); }
+
+  /* TICKER */
+  /* TICKER ANIMATION */
+  @keyframes tickerScroll {
+    0% { 
+      transform: translateX(0); 
+    }
+    100% { 
+      transform: translateX(-50%); 
+    }
+  }
+  
+  @keyframes tickerBlink {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+  
+  .ticker-strip { 
+    background: #111820; 
+    padding: 8px 16px; 
+    border-radius: 4px; 
+    display: flex; 
+    gap: 24px; 
+    overflow: hidden; 
+    margin-bottom: 26px; 
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  
+  .ticker-strip::-webkit-scrollbar { 
+    display: none; 
+  }
+  
+  .ticker-items { 
+    display: flex; 
+    gap: 24px;
+    min-width: max-content;
+    animation: tickerScroll 75s linear infinite;
+    will-change: transform;
+  }
+  
+  .ticker-item { 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+    white-space: nowrap;
+    flex-shrink: 0;
+    animation: tickerBlink 3s ease-in-out infinite;
+  }
+  
+  .ticker-item:nth-child(2) { animation-delay: 0.3s; }
+  .ticker-item:nth-child(3) { animation-delay: 0.6s; }
+  .ticker-item:nth-child(4) { animation-delay: 0.9s; }
+  .ticker-item:nth-child(5) { animation-delay: 1.2s; }
+  .ticker-item:nth-child(6) { animation-delay: 1.5s; }
+  .ticker-item:nth-child(7) { animation-delay: 1.8s; }
+  .ticker-item:nth-child(8) { animation-delay: 2.1s; }
+  .ticker-item:nth-child(n+9) { animation-delay: 0s; }
+  .ticker-sym { font-size: 11px; font-weight: 700; color: var(--gold); }
+  .ticker-val { font-size: 12px; color: #c8d8e8; }
+  .ticker-chg { font-size: 11px; font-weight: 600; }
+  .up { color: #4caf80; } .dn { color: #e05555; } .fl { color: #8899aa; }
+
+  /* LEAD GRID */
+  .lead-grid { display: grid; grid-template-columns: 1fr 260px; gap: 24px; padding-bottom: 26px; border-bottom: 1px solid var(--rule); margin-bottom: 26px; }
+  .lead-kicker { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--primary); margin-bottom: 10px; }
+  .lead-headline { font-family: 'Libre Baskerville', serif; font-size: 28px; font-weight: 700; line-height: 1.25; margin-bottom: 14px; color: var(--ink); }
+  .lead-deck { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 15px; color: var(--ink-soft); line-height: 1.75; margin-bottom: 16px; }
+  .lead-body { font-size: 13.5px; color: var(--ink-soft); line-height: 1.8; }
+  .lead-body p + p { margin-top: 10px; }
+  .lead-byline { font-size: 11px; color: var(--ink-muted); margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--rule); }
+  .lead-byline strong { color: var(--gold); }
+
+  /* SIDEBAR */
+  .sidebar-head { font-family: 'Libre Baskerville', serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; border-bottom: 2px solid var(--rule-heavy); padding-bottom: 6px; margin-bottom: 12px; }
+  .brief { padding: 11px 0; border-bottom: 1px solid var(--rule); }
+  .brief:last-child { border-bottom: none; }
+  .brief-badge { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+  .brief-title { font-family: 'Libre Baskerville', serif; font-size: 13.5px; font-weight: 700; line-height: 1.3; margin-bottom: 3px; }
+  .brief-body { font-size: 12px; color: var(--ink-soft); line-height: 1.55; }
+
+  /* MARKETS DEEP DIVE */
+  .markets-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+  .mcard { background: var(--white); border: 1px solid var(--rule); border-radius: var(--radius); padding: 18px 20px; }
+  .mcard-title { font-family: 'Libre Baskerville', serif; font-size: 15px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--rule); padding-bottom: 10px; }
+  .mcard-title .mcard-icon { font-size: 16px; }
+  .mcard-stat { display: flex; justify-content: space-between; align-items: baseline; padding: 7px 0; border-bottom: 1px solid var(--rule); }
+  .mcard-stat:last-of-type { border-bottom: none; }
+  .mcard-label { font-size: 12px; font-weight: 600; color: var(--ink-soft); }
+  .mcard-value { font-size: 14px; font-weight: 700; color: var(--ink); }
+  .mcard-chg { font-size: 11px; font-weight: 600; }
+  .mcard-desc { font-size: 12px; color: var(--ink-muted); margin-top: 12px; line-height: 1.6; padding-top: 10px; border-top: 1px solid var(--rule); }
+  .mcard-btn { display: inline-block; margin-top: 12px; font-size: 11px; font-weight: 600; padding: 5px 14px; border: 1px solid var(--rule-heavy); border-radius: 2px; color: var(--ink); cursor: pointer; background: transparent; }
+  .mcard-btn:hover { background: var(--gold-light); }
+
+  /* BREAKING NEWS BANNER */
+  .breaking { background: #c0392b; color: white; padding: 10px 20px; border-radius: var(--radius); margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+  .breaking-label { font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; background: white; color: #c0392b; padding: 2px 8px; border-radius: 2px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+  .breaking-text { font-size: 13px; font-weight: 500; line-height: 1.5; }
+
+  /* STORY CARDS */
+  .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+  .story-card { background: var(--white); border: 1px solid var(--rule); border-radius: var(--radius); padding: 16px 18px; }
+  .story-badge { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .story-title { font-family: 'Libre Baskerville', serif; font-size: 14px; font-weight: 700; line-height: 1.3; margin-bottom: 8px; }
+  .story-body { font-size: 12.5px; color: var(--ink-soft); line-height: 1.65; }
+  .story-source { font-size: 10px; color: var(--ink-muted); margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--rule); }
+
+  /* OPPORTUNITY CARDS */
+  .opp-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 4px; }
+  .opp-card { border: 1px solid var(--rule); border-radius: var(--radius); padding: 14px 16px; background: var(--white); }
+  .opp-badge { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .opp-title { font-family: 'Libre Baskerville', serif; font-size: 13px; font-weight: 700; line-height: 1.3; margin-bottom: 5px; }
+  .opp-sub { font-size: 11.5px; color: var(--ink-muted); line-height: 1.5; }
+
+  /* CLUB UPDATE */
+  .update-box { background: var(--gold-light); border-left: 3px solid var(--gold); padding: 16px 20px; border-radius: 0 var(--radius) var(--radius) 0; }
+  .update-title { font-family: 'Libre Baskerville', serif; font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .update-body { font-size: 13px; color: var(--ink-soft); line-height: 1.72; }
+  .event-row { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--rule); }
+  .event-row:last-child { border-bottom: none; }
+  .event-date { background: var(--ink); color: var(--gold); font-size: 10px; font-weight: 700; padding: 4px 8px; border-radius: 2px; white-space: nowrap; flex-shrink: 0; }
+  .event-name { font-size: 13px; font-weight: 500; color: var(--ink); }
+  .event-loc { font-size: 11.5px; color: var(--ink-muted); }
+
+  /* SPOTLIGHT */
+  .spotlight { display: flex; gap: 16px; align-items: flex-start; background: var(--white); border: 1px solid var(--rule); border-radius: var(--radius); padding: 18px 20px; }
+  .avatar { width: 52px; height: 52px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-family: 'Libre Baskerville', serif; font-size: 18px; font-weight: 700; color: var(--white); flex-shrink: 0; }
+  .spot-name { font-family: 'Libre Baskerville', serif; font-size: 17px; font-weight: 700; margin-bottom: 2px; }
+  .spot-role { font-size: 12px; color: var(--gold); font-weight: 500; margin-bottom: 8px; }
+  .spot-bio { font-size: 13px; color: var(--ink-soft); line-height: 1.72; }
+/* TIP */
+.tip-box {
+  background: #17202a;
+  border-radius: var(--radius);
+  padding: 22px 28px;
+  display: flex;
+  gap: 22px;
+  align-items: flex-start;
+}
+
+.tip-num {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 60px;
+  font-weight: 700;
+  font-style: italic;
+  color: #d4af37;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.tip-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #d4af37;
+  margin-bottom: 8px;
+}
+
+.tip-text {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 15px;
+  font-style: italic;
+  color: #e5e7eb;
+  line-height: 1.72;
+}
+  /* SOURCES */
+  .sources-bar { background: var(--paper-dark); border: 1px solid var(--rule); border-radius: var(--radius); padding: 12px 18px; margin-top: 28px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .sources-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink-muted); }
+  .source-tag { font-size: 11px; font-weight: 500; padding: 3px 10px; border: 1px solid var(--rule); border-radius: 2px; color: var(--ink-soft); background: var(--white); }
+
+  /* FOOTER */
+  .footer { background: #1a1f2e; margin-top: 40px; padding: 24px 24px; border-top: 1px solid var(--rule); }
+  .footer-inner { max-width: var(--max); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-brand { font-family: 'Libre Baskerville', serif; font-size: 18px; font-style: italic; color: var(--primary); }
+  .footer-sub { font-size: 12px; color: var(--ink-muted); margin-top: 4px; }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { font-size: 12px; color: var(--primary); text-decoration: none; font-weight: 500; transition: opacity 0.2s; }
+  .footer-links a:hover { opacity: 0.8; }
+
+
+  /* CLICKABLE BRIEFS */
+  .brief-link { display: block; color: var(--ink); text-decoration: none; cursor: pointer; }
+  .brief-link:hover { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
+  .brief-more { display: inline-block; margin-top: 6px; font-size: 11px; font-weight: 600; color: var(--gold); text-decoration: none; }
+  .brief-more:hover { text-decoration: underline; }
+  .brief-link:focus-visible, .brief-more:focus-visible, .back-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+
+  /* FULL ARTICLE VIEW */
+  .article { max-width: 660px; margin: 0 auto; }
+  .back-btn { display: inline-block; font-size: 12px; font-weight: 600; padding: 6px 14px; border: 1px solid var(--rule-heavy); border-radius: 2px; background: var(--white); color: var(--ink); cursor: pointer; margin-bottom: 22px; }
+  .back-btn:hover { background: var(--gold-light); }
+  .article-kicker { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .article-headline { font-family: 'Libre Baskerville', serif; font-size: clamp(24px,5vw,32px); font-weight: 700; line-height: 1.2; margin-bottom: 12px; }
+  .article-deck { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 15.5px; color: var(--ink-soft); line-height: 1.7; margin-bottom: 14px; }
+  .article-byline { font-size: 11px; color: var(--ink-muted); padding: 10px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin-bottom: 20px; }
+  .article-byline strong { color: var(--gold); }
+  .article-body { font-size: 15px; color: var(--ink-soft); line-height: 1.85; }
+  .article-body p + p { margin-top: 14px; }
+  .article-body h3 { font-family: 'Libre Baskerville', serif; font-size: 17px; color: var(--ink); margin: 26px 0 10px; }
+  .article-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 10px; margin: 20px 0; }
+  .article-stat { background: var(--white); border: 1px solid var(--rule); border-radius: var(--radius); padding: 12px 14px; }
+  .article-stat-val { font-family: 'Libre Baskerville', serif; font-size: 18px; font-weight: 700; color: var(--ink); }
+  .article-stat-label { font-size: 11px; color: var(--ink-muted); margin-top: 2px; }
+  .article-callout { background: var(--gold-light); border-left: 3px solid var(--gold); padding: 16px 20px; border-radius: 0 var(--radius) var(--radius) 0; margin-top: 24px; }
+  .article-callout-title { font-family: 'Libre Baskerville', serif; font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+  .article-callout p { font-size: 14px; color: var(--ink-soft); line-height: 1.75; }
+  .article-nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--rule); flex-wrap: wrap; }
+  .article-nav a { font-size: 12px; font-weight: 600; color: var(--gold); text-decoration: none; cursor: pointer; }
+  .article-nav a:hover { text-decoration: underline; }
+
+
+  /* OPPORTUNITY LINKS */
+  a.opp-card { display: flex; flex-direction: column; text-decoration: none; color: inherit; transition: border-color .2s, box-shadow .2s; }
+  a.opp-card:hover { border-color: var(--primary); box-shadow: 0 2px 10px rgba(0,102,204,.12); }
+  a.opp-card:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+  .opp-cta { margin-top: auto; padding-top: 10px; font-size: 11.5px; font-weight: 600; color: var(--primary); }
+  .opp-cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: auto; padding-top: 10px; }
+  .opp-cta-row a { font-size: 11.5px; font-weight: 600; color: var(--primary); text-decoration: none; }
+  .opp-cta-row a:hover, a.opp-card:hover .opp-cta { text-decoration: underline; }
+  .opp-note { font-size: 11.5px; color: var(--ink-muted); margin-top: 16px; }
+  div.opp-card { display: flex; flex-direction: column; }
+
+  /* MARKET BUTTONS */
+  .mcard { display: flex; flex-direction: column; }
+  .mcard-btn { align-self: flex-start; margin-top: auto; }
+  .mcard-desc { margin-bottom: 12px; }
+  .mcard-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+  .mcard-btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+  /* ASK THE LEDGER */
+  .ask { background: var(--white); border: 1px solid var(--rule); border-radius: var(--radius); padding: 22px 26px; }
+  .ask-title { font-family: 'Libre Baskerville', serif; font-size: 19px; font-weight: 700; line-height: 1.3; margin-bottom: 6px; }
+  .ask-intro { font-size: 14px; color: var(--ink-soft); line-height: 1.75; margin-bottom: 18px; }
+  .ask-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .ask-field { display: flex; flex-direction: column; gap: 6px; }
+  .ask-field.full { grid-column: 1 / -1; }
+  .ask-field label { font-size: 12px; font-weight: 600; color: var(--ink); }
+  .ask-field .hint { font-weight: 400; color: var(--ink-muted); }
+  .ask-form input, .ask-form select, .ask-form textarea { font: inherit; font-size: 14px; padding: 9px 12px; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--paper); color: var(--ink); width: 100%; }
+  .ask-form textarea { min-height: 120px; resize: vertical; line-height: 1.6; }
+  .ask-form input:focus, .ask-form select:focus, .ask-form textarea:focus { outline: 2px solid var(--primary); outline-offset: 1px; border-color: var(--primary); }
+  .ask-type { display: flex; gap: 8px; flex-wrap: wrap; }
+  .ask-type input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .ask-type label { font-size: 13px; font-weight: 600; padding: 7px 14px; border: 1px solid var(--rule); border-radius: 999px; cursor: pointer; color: var(--ink-soft); background: var(--paper); }
+  .ask-type input:checked + label { background: var(--primary); border-color: var(--primary); color: #fff; }
+  .ask-type input:focus-visible + label { outline: 2px solid var(--primary); outline-offset: 2px; }
+  .ask-check { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-soft); }
+  .ask-check input { width: auto; }
+  .ask-actions { grid-column: 1 / -1; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .ask-submit { font-size: 13px; font-weight: 600; padding: 10px 22px; background: var(--primary); color: #fff; border: none; border-radius: var(--radius); cursor: pointer; }
+  .ask-submit:hover { background: #0052a3; }
+  .ask-submit:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+  .ask-status { font-size: 13px; color: var(--ink-soft); }
+  .ask-status.error { color: var(--red); }
+  .ask-foot { font-size: 12px; color: var(--ink-muted); margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--rule); line-height: 1.6; }
+  @media (max-width: 600px) { .ask-form { grid-template-columns: 1fr; } .ask { padding: 18px; } }
+  @media (prefers-reduced-motion: reduce) { .ticker-items, .ticker-item { animation: none !important; } }
+
+  /* PAGE SECTIONS */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .lead-grid, .markets-grid, .story-grid { grid-template-columns: 1fr; }
+    .sidebar { border-top: 1px solid var(--rule); padding-top: 18px; }
+    .opp-grid { grid-template-columns: 1fr; }
+    .tip-box { flex-direction: column; gap: 6px; }
+    .sub-form { display: none; }
+    .masthead-meta { justify-content: center; flex-direction: column; }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e5e7eb; --ink-soft: #9ca3af; --ink-muted: #6b7280;
+      --primary: #60a5fa;
+      --paper: #111827; --paper-dark: #1f2937; 
+      --white: #1f2937; --rule: #374151;
+    }
+
+    .topbar {
+      background: #0f172a;
+      border-bottom-color: #374151;
+    }
+
+    .topbar-links a {
+      color: #60a5fa;
+    }
+
+    .masthead {
+      border-bottom-color: #374151;
+    }
+
+    .masthead-name em {
+      color: #60a5fa;
+    }
+
+    body {
+      background: #111827;
+      color: #e5e7eb;
+    }
+
+    .nav-wrap {
+      border-bottom-color: #374151;
+    }
+
+    .nav-item.on {
+      color: #60a5fa;
+      border-bottom-color: #60a5fa;
+    }
+
+    .footer {
+      background: #0f172a;
+      border-top-color: #374151;
+    }
+
+    .footer-brand,
+    .footer-links a {
+      color: #60a5fa;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span>New York Institute of Technology &nbsp;·&nbsp; School of Management &nbsp;·&nbsp; Monday, September 21, 2026</span>
+  <div class="topbar-links">
+    <a href="https://campusgroups.com/clubs/finance-club-nyc" target="_blank">Campus Groups</a>
+    <a href="https://instagram.com/financeclubnyc" target="_blank">Instagram</a>
+    <a href="https://wa.me/1234567890" target="_blank">WhatsApp</a>
+  </div>
+</div>
+
+<div class="masthead">
+  <div class="masthead-eyebrow">Finance Club NYC — Official Monthly Publication</div>
+  <a href="#top-stories" class="masthead-name home-link" onclick="goHome(event)" title="Go to Top Stories">The Finance <em>Ledger</em></a>
+  <hr class="masthead-rule">
+  <div class="masthead-meta">
+    <span>Vol. 1 &nbsp;·&nbsp; Issue 1 &nbsp;·&nbsp; September 2026</span>
+    <span class="masthead-badge">Digital Edition</span>
+    <span>Free &nbsp;·&nbsp; Published Monthly</span>
+  </div>
+</div>
+
+<div class="sharebar-wrap">
+  <div class="sharebar">
+    <span class="sharebar-label">Share:</span>
+    <button class="share-btn" onclick="navigator.clipboard.writeText(window.location.href).then(()=>{this.textContent='Copied ✓';setTimeout(()=>{this.textContent='Copy link'},2000)})">Copy link</button>
+    <button class="share-btn" onclick="window.location.href='mailto:?subject=The Finance Ledger - Finance Club NYC&body=Check out the latest issue of The Finance Ledger (Finance Club NYC monthly newsletter):%0A%0A' + window.location.href">Email</button>
+    <button class="share-btn" onclick="window.open('https://wa.me/?text=The Finance Ledger - Finance Club NYC monthly newsletter: ' + window.location.href, '_blank')">WhatsApp</button>
+    <div class="sub-form">
+      <input type="email" placeholder="your@nyit.edu" id="sub-email" onkeypress="if(event.key==='Enter') { document.querySelector('.sub-form button').click(); }">
+      <button onclick="const email = document.getElementById('sub-email').value; if(email && email.includes('@')) { window.location.href='mailto:financenyc@nyit.edu?subject=Newsletter Subscription&body=Subscribe this email: ' + email; this.textContent='Subscribed ✓'; setTimeout(()=>{this.textContent='Subscribe'},2000); document.getElementById('sub-email').value=''; } else { alert('Please enter a valid email address'); }">Subscribe</button>
+    </div>
+  </div>
+</div>
+
+<div class="nav-wrap">
+  <div class="nav-inner">
+    <div class="nav-item on" data-page="top-stories" onclick="showPage('top-stories',this)">Top Stories</div>
+    <div class="nav-item" data-page="markets" onclick="showPage('markets',this)">Markets</div>
+    <div class="nav-item" data-page="opportunities" onclick="showPage('opportunities',this)">Opportunities</div>
+    <div class="nav-item" data-page="club-events" onclick="showPage('club-events',this)">Club Events</div>
+    <div class="nav-item" data-page="spotlight" onclick="showPage('spotlight',this)">Spotlight</div>
+    <div class="nav-item" data-page="finance-tip" onclick="showPage('finance-tip',this)">Finance Tip</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- ═══════════════════ TOP STORIES ═══════════════════ -->
+  <div id="top-stories" class="page active">
+
+    <div class="ticker-strip">
+      <div class="ticker-items">
+      <div class="ticker-item"><span class="ticker-sym">S&P 500</span><span class="ticker-val">7,767</span><span class="ticker-chg up">▲ +1.6%</span></div>
+      <div class="ticker-item"><span class="ticker-sym">NASDAQ</span><span class="ticker-val">27,139</span><span class="ticker-chg up">▲ +2.3%</span></div>
+      <div class="ticker-item"><span class="ticker-sym">DOW</span><span class="ticker-val">41,080</span><span class="ticker-chg dn">▼ −0.1%</span></div>
+      <div class="ticker-item"><span class="ticker-sym">10-YR</span><span class="ticker-val">4.98%</span><span class="ticker-chg dn">▼ easing</span></div>
+      <div class="ticker-item"><span class="ticker-sym">FED RATE</span><span class="ticker-val">3.75–4.00%</span><span class="ticker-chg dn">▲ Hiked</span></div>
+      <div class="ticker-item"><span class="ticker-sym">BRENT OIL</span><span class="ticker-val">$99.80</span><span class="ticker-chg up">▼ −4th day</span></div>
+      <div class="ticker-item"><span class="ticker-sym">USD/EUR</span><span class="ticker-val">0.918</span><span class="ticker-chg dn">▼ −0.2%</span></div>
+      <div class="ticker-item"><span class="ticker-sym">BTC</span><span class="ticker-val">$63,400</span><span class="ticker-chg up">▲ +1.1%</span></div>
+      <!-- Duplicate for seamless loop -->
+      <div class="ticker-item"><span class="ticker-sym">S&P 500</span><span class="ticker-val">7,767</span><span class="ticker-chg up">▲ +1.6%</span></div>
+      <div class="ticker-item"><span class="ticker-sym">NASDAQ</span><span class="ticker-val">27,139</span><span class="ticker-chg up">▲ +2.3%</span></div>
+      <div class="ticker-item"><span class="ticker-sym">DOW</span><span class="ticker-val">41,080</span><span class="ticker-chg dn">▼ −0.1%</span></div>
+      <div class="ticker-item"><span class="ticker-sym">10-YR</span><span class="ticker-val">4.98%</span><span class="ticker-chg dn">▼ easing</span></div>
+      <div class="ticker-item"><span class="ticker-sym">FED RATE</span><span class="ticker-val">3.75–4.00%</span><span class="ticker-chg dn">▲ Hiked</span></div>
+      <div class="ticker-item"><span class="ticker-sym">BRENT OIL</span><span class="ticker-val">$99.80</span><span class="ticker-chg up">▼ −4th day</span></div>
+      <div class="ticker-item"><span class="ticker-sym">USD/EUR</span><span class="ticker-val">0.918</span><span class="ticker-chg dn">▼ −0.2%</span></div>
+      <div class="ticker-item"><span class="ticker-sym">BTC</span><span class="ticker-val">$63,400</span><span class="ticker-chg up">▲ +1.1%</span></div>
+      </div>
+    </div>
+
+    <div class="breaking">
+      <span class="breaking-label">Breaking</span>
+      <span class="breaking-text">Fed raises rates 25bps to 3.75–4.00% for first time since 2023 — signals at least one more hike before year end. Markets recover today as oil falls and Trump-Xi summit looms Wednesday.</span>
+    </div>
+
+    <div class="lead-grid">
+      <div class="lead-story">
+        <div class="lead-kicker">Cover Story · September 21, 2026</div>
+        <h1 class="lead-headline">Fed Hikes Rates, Markets Bounce Back — Here's What It Means for You</h1>
+        <p class="lead-deck">The Federal Reserve raised interest rates for the first time since 2023, rattling Wall Street last week — but markets are recovering today as oil falls and a US-China summit approaches.</p>
+        <div class="lead-body">
+          <p>Last Wednesday, September 16, the Federal Open Market Committee voted unanimously — all 12 members — to raise the federal funds rate by 25 basis points, lifting it from 3.50–3.75% to 3.75–4.00%. Fed Chair Kevin Warsh confirmed this is the start of a new tightening cycle, not a one-off move, sending a clear message: the inflation fight is not over.</p>
+          <p>The Fed's new "dot plot" — a chart showing where policymakers expect rates to go — now puts the median forecast at 4.125% by year end, meaning at least one more hike is likely before December 2026. As many as 16 out of 19 FOMC members projected at least one additional hike this year.</p>
+          <p>What's driving this? Inflation is still sitting at 3.4% year-over-year, well above the Fed's 2% target. Core PCE — the Fed's preferred measure — is even higher at 3.7%. Spiking energy prices from the ongoing Middle East conflict have kept inflation stubborn despite earlier signs of cooling.</p>
+          <p>Today, markets are recovering strongly. The S&P 500 surged +1.6% to 7,767 and the Nasdaq jumped +2.3% to 27,139 as oil prices fell for a fourth consecutive session, easing inflation fears. Tech and chip stocks are leading the rally, with massive gains in META, INTC, AMD, and ARM ahead of META's developers forum this week.</p>
+        </div>
+        <div class="lead-byline">By <strong>Aman Lathiya</strong>, Secretary &nbsp;·&nbsp; Finance Club NYC &nbsp;·&nbsp; September 21, 2026</div>
+      </div>
+      <div class="sidebar">
+        <div class="sidebar-head">Today's Briefs</div>
+        <div class="brief">
+          <div class="brief-badge">Fed · Confirmed</div>
+          <a href="#article-fed" class="brief-title brief-link" onclick="openArticle(event,'article-fed')">Fed hikes 25bps — first increase since July 2023</a>
+          <div class="brief-body">Unanimous 12-0 vote. Rate now at 3.75–4.00%. Chair Warsh calls it the start of a new rate cycle, not a one-time move. At least one more hike expected in 2026.</div>
+          <a href="#article-fed" class="brief-more" onclick="openArticle(event,'article-fed')">Read full story</a>
+        </div>
+        <div class="brief">
+          <div class="brief-badge">Markets · Today</div>
+          <a href="#article-markets" class="brief-title brief-link" onclick="openArticle(event,'article-markets')">S&P 500 surges +1.6%, Nasdaq +2.3% Monday</a>
+          <div class="brief-body">Stocks bouncing back from last week's selloff. Oil falling below $100 is easing inflation anxiety and giving tech stocks room to run.</div>
+          <a href="#article-markets" class="brief-more" onclick="openArticle(event,'article-markets')">Read full story</a>
+        </div>
+        <div class="brief">
+          <div class="brief-badge">Geopolitics · This Week</div>
+          <a href="#article-summit" class="brief-title brief-link" onclick="openArticle(event,'article-summit')">Trump hosts Xi at White House on Sept 24</a>
+          <div class="brief-body">The US-China trade truce and a possible $30 billion tariff deal are on the table. This summit will move markets — watch it closely.</div>
+          <a href="#article-summit" class="brief-more" onclick="openArticle(event,'article-summit')">Read full story</a>
+        </div>
+        <div class="brief">
+          <div class="brief-badge">Oil · Easing</div>
+          <a href="#article-oil" class="brief-title brief-link" onclick="openArticle(event,'article-oil')">Brent crude falls below $100 for first time in weeks</a>
+          <div class="brief-body">Diplomatic progress in Iran conflict and improved oil flows through Strait of Hormuz are cooling prices, reducing inflation pressure globally.</div>
+          <a href="#article-oil" class="brief-more" onclick="openArticle(event,'article-oil')">Read full story</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-head"><div class="sec-head-text">More Stories This Week</div><div class="sec-head-line"></div></div>
+    <div class="story-grid">
+      <div class="story-card">
+        <div class="story-badge">Investment Banking</div>
+        <div class="story-title">Goldman Sachs Falls 8.5%, Morgan Stanley 5.5% After Weak Fee Guidance</div>
+        <div class="story-body">Bank of America indicated Q3 investment banking fees would come in at $1.6–1.8 billion, well below the roughly $2.04 billion Wall Street expected. Goldman Sachs and Morgan Stanley followed with similar warnings, dragging the financial services sector down 2.3% last week. This is a key signal that deal activity remains slow despite the broader market recovery.</div>
+        <div class="story-source">Source: Bloomberg, The Weekly Markets Brief · Sept 21, 2026</div>
+      </div>
+      <div class="story-card">
+        <div class="story-badge">US-China Trade</div>
+        <div class="story-title">Trump-Xi Summit September 24: What's at Stake for Global Markets</div>
+        <div class="story-body">President Trump will host Xi Jinping at the White House this Wednesday in the first Chinese state visit in over a decade. The October 2025 trade truce — which swapped US tariff pauses for continued Chinese rare earth exports — expires in roughly five weeks. A $30 billion tariff reduction framework covering goods on both sides is being negotiated. Treasury Secretary Bessent has been leading talks with Chinese Vice Premier He Lifeng. The outcome will directly affect tech supply chains, inflation, and US-China equity markets.</div>
+        <div class="story-source">Source: Reuters, Euronews · Sept 18, 2026</div>
+      </div>
+      <div class="story-card">
+        <div class="story-badge">Economy</div>
+        <div class="story-title">Bank of Japan Raises Rates to 1.25% — Highest Since 1995</div>
+        <div class="story-body">The Bank of Japan raised its policy rate to 1.25% last week, marking its highest level since 1995. In a surprising reaction, the yen fell rather than rose after the announcement, while Japanese government bonds dropped 2.5% in dollar terms, making them the weakest part of the global bond market. This matters for students because Japan's interest rate moves affect global capital flows and currency markets that show up in every finance career.</div>
+        <div class="story-source">Source: Portfolio Thinking, Morningstar · Sept 21, 2026</div>
+      </div>
+      <div class="story-card">
+        <div class="story-badge">AI & Tech</div>
+        <div class="story-title">AI-Driven Stocks Lead Market Recovery Despite Rate Hike Fears</div>
+        <div class="story-body">Despite the Fed's hawkish tone, technology and AI-oriented stocks are leading today's market rally. META surges ahead of its developers forum this week. Chip stocks including Intel (INTC), AMD, and ARM are posting massive gains. The tech sector managed to close last week up +1.0% even as the overall market fell. Policymakers and industry leaders are also debating AI regulation, which could reshape investment strategies in the sector.</div>
+        <div class="story-source">Source: CNBC, Investrade Market Review · Sept 21, 2026</div>
+      </div>
+    </div>
+
+    <div class="sources-bar">
+      <span class="sources-label">Sources</span>
+      <span class="source-tag">Bloomberg</span>
+      <span class="source-tag">Reuters</span>
+      <span class="source-tag">CNBC</span>
+      <span class="source-tag">JP Morgan Wealth Mgmt</span>
+      <span class="source-tag">Kiplinger</span>
+      <span class="source-tag">Investrade</span>
+      <span class="source-tag">Tickmill</span>
+      <span class="source-tag">CaixaBank Research</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ FULL ARTICLES ═══════════════════ -->
+  <div id="article-fed" class="page article-page">
+    <article class="article">
+      <button class="back-btn" onclick="goHome(event)">← Back to Top Stories</button>
+      <div class="article-kicker">Fed · Confirmed</div>
+      <h1 class="article-headline">Fed Hikes 25bps — First Increase Since July 2023</h1>
+      <p class="article-deck">In a unanimous vote, the Federal Reserve raised rates and made clear this is the start of a new tightening cycle, not a one-off move.</p>
+      <div class="article-byline">By <strong>Aman Lathiya</strong>, Secretary &nbsp;·&nbsp; Finance Club NYC &nbsp;·&nbsp; September 21, 2026</div>
+      <div class="article-stats"><div class="article-stat"><div class="article-stat-val">3.75–4.00%</div><div class="article-stat-label">New fed funds range</div></div><div class="article-stat"><div class="article-stat-val">12–0</div><div class="article-stat-label">FOMC vote</div></div><div class="article-stat"><div class="article-stat-val">4.125%</div><div class="article-stat-label">Year-end median (dot plot)</div></div><div class="article-stat"><div class="article-stat-val">3.4%</div><div class="article-stat-label">Inflation, year-over-year</div></div></div>
+      <div class="article-body"><p>On Wednesday, September 16, the Federal Open Market Committee voted 12–0 to raise the federal funds rate by 25 basis points, from 3.50–3.75% to 3.75–4.00%. It's the Fed's first rate increase since July 2023.</p>
+ <p>Fed Chair Kevin Warsh described the move as the beginning of a new rate cycle rather than a single adjustment. In plain terms: the Fed is telling markets to expect more.</p>
+ <h3>What the dot plot says</h3>
+ <p>The "dot plot" is a chart where each Fed policymaker marks where they think rates should be at the end of the year. The new median sits at 4.125% for year-end 2026 — meaning at least one more 25bps hike is likely before December. As many as 16 of the 19 FOMC participants projected at least one more increase this year. Markets are currently pricing roughly an 88% chance of another hike in Q4.</p>
+ <h3>Why the Fed is raising rates</h3>
+ <p>Inflation is still running at 3.4% year-over-year, well above the Fed's 2% target. Core PCE, the Fed's preferred gauge, is even higher at 3.7%. Energy prices driven by the Middle East conflict have kept inflation sticky, even after earlier signs it was cooling.</p>
+ <h3>How markets reacted</h3>
+ <p>Stocks sold off after the announcement, and the 10-year Treasury yield touched 5% last week. The dollar strengthened, with the DXY index gaining 0.9% on the week, and gold fell — which is typical when real rates rise, since gold pays no interest. By Monday, markets were recovering as oil prices dropped and the 10-year eased to around 4.98%.</p></div>
+      <div class="article-callout"><div class="article-callout-title">What this means for you</div><p>Borrowing gets more expensive: credit card rates, auto loans, and student loan refinancing all move higher. The upside is that savings accounts and CDs pay more too, so if you have cash sitting idle, it's a good time to compare high-yield savings accounts. On the career side, rate environments are the hottest interview topic right now — be ready to explain what a hike does to borrowing, valuations, and bank earnings.</p></div>
+      <div class="sources-bar"><span class="sources-label">Sources</span><span class="source-tag">Bloomberg</span><span class="source-tag">Reuters</span><span class="source-tag">JP Morgan Wealth Mgmt</span><span class="source-tag">Kiplinger</span></div>
+      <div class="article-nav">
+        <a href="#article-oil" onclick="openArticle(event,'article-oil')">Previous: Oil below $100</a>
+        <a href="#article-markets" onclick="openArticle(event,'article-markets')">Next: Monday’s rally</a>
+      </div>
+    </article>
+  </div>
+
+  <div id="article-markets" class="page article-page">
+    <article class="article">
+      <button class="back-btn" onclick="goHome(event)">← Back to Top Stories</button>
+      <div class="article-kicker">Markets · Today</div>
+      <h1 class="article-headline">S&P 500 Surges +1.6%, Nasdaq +2.3% Monday</h1>
+      <p class="article-deck">Stocks bounced back from last week's Fed-driven selloff, led by tech and chip names, as falling oil eased inflation worries.</p>
+      <div class="article-byline">By <strong>Aman Lathiya</strong>, Secretary &nbsp;·&nbsp; Finance Club NYC &nbsp;·&nbsp; September 21, 2026</div>
+      <div class="article-stats"><div class="article-stat"><div class="article-stat-val">7,767</div><div class="article-stat-label">S&P 500 (+1.6%)</div></div><div class="article-stat"><div class="article-stat-val">27,139</div><div class="article-stat-label">Nasdaq (+2.3%)</div></div><div class="article-stat"><div class="article-stat-val">41,080</div><div class="article-stat-label">Dow (−0.1%)</div></div><div class="article-stat"><div class="article-stat-val">7,816</div><div class="article-stat-label">S&P all-time high (June 1)</div></div></div>
+      <div class="article-body"><p>Wall Street staged a strong recovery on Monday, September 21. The S&P 500 rose 1.6% to 7,767 and the Nasdaq Composite jumped 2.3% to 27,139. The Dow was the exception, slipping 0.1% to 41,080.</p>
+ <p>That puts the S&P 500 back within reach of its all-time high of 7,816, set on June 1 — a quick turnaround after the index fell about 0.5% to around 7,650 following last week's Fed decision.</p>
+ <h3>What's driving the rally</h3>
+ <p>The biggest factor is oil. Brent crude fell for a fourth straight session and dropped below $100, which eases fears that energy costs will keep inflation high — and, by extension, that the Fed will have to hike aggressively. Optimism ahead of Wednesday's Trump-Xi summit is adding fuel.</p>
+ <h3>Tech and chips lead the way</h3>
+ <p>Technology and communication services stocks are leading. META is rallying ahead of its developers forum this week, and chipmakers Intel (INTC), AMD, and ARM are posting big gains. Tech was already the standout last week, finishing up 1.0% even as the broader market fell.</p>
+ <h3>Who's lagging</h3>
+ <p>Energy stocks are falling as oil retreats. Financials are also still under pressure after the sector dropped 2.3% last week, when Bank of America, Goldman Sachs, and Morgan Stanley warned that Q3 investment banking fees would come in below expectations.</p></div>
+      <div class="article-callout"><div class="article-callout-title">Why this matters</div><p>One good day doesn't erase a tightening cycle. Watch whether the rally holds through the Trump-Xi summit and whether oil keeps falling. Notice the split, too: rate-sensitive tech is rallying on lower oil, while banks are weighed down by slow deal activity. Understanding why sectors move differently on the same news is exactly the kind of thinking interviewers look for.</p></div>
+      <div class="sources-bar"><span class="sources-label">Sources</span><span class="source-tag">CNBC</span><span class="source-tag">Bloomberg</span><span class="source-tag">Investrade</span></div>
+      <div class="article-nav">
+        <a href="#article-fed" onclick="openArticle(event,'article-fed')">Previous: The Fed hike</a>
+        <a href="#article-summit" onclick="openArticle(event,'article-summit')">Next: Trump-Xi summit</a>
+      </div>
+    </article>
+  </div>
+
+  <div id="article-summit" class="page article-page">
+    <article class="article">
+      <button class="back-btn" onclick="goHome(event)">← Back to Top Stories</button>
+      <div class="article-kicker">Geopolitics · This Week</div>
+      <h1 class="article-headline">Trump Hosts Xi at White House on Sept 24</h1>
+      <p class="article-deck">The first Chinese state visit in over a decade comes with a trade truce about to expire and a possible $30 billion tariff deal on the table.</p>
+      <div class="article-byline">By <strong>Aman Lathiya</strong>, Secretary &nbsp;·&nbsp; Finance Club NYC &nbsp;·&nbsp; September 21, 2026</div>
+      <div class="article-stats"><div class="article-stat"><div class="article-stat-val">Sept 24</div><div class="article-stat-label">Summit date (Wednesday)</div></div><div class="article-stat"><div class="article-stat-val">$30B</div><div class="article-stat-label">Tariff reduction framework</div></div><div class="article-stat"><div class="article-stat-val">~5 weeks</div><div class="article-stat-label">Until trade truce expires</div></div><div class="article-stat"><div class="article-stat-val">10+ years</div><div class="article-stat-label">Since last Chinese state visit</div></div></div>
+      <div class="article-body"><p>President Trump will host Chinese President Xi Jinping at the White House on Wednesday, September 24. It will be the first Chinese state visit to the US in more than a decade, and markets are watching closely.</p>
+ <h3>The trade truce clock</h3>
+ <p>The backdrop is the trade truce agreed in October 2025. Under that deal, the US paused certain tariffs in exchange for China continuing to export rare earth minerals — materials that are essential for chips, electronics, EVs, and defense equipment. That truce expires in roughly five weeks, so this summit is a key moment to extend or replace it.</p>
+ <h3>What's being negotiated</h3>
+ <p>A $30 billion tariff reduction framework covering goods on both sides is reportedly in the works. Treasury Secretary Scott Bessent has been leading talks with Chinese Vice Premier He Lifeng.</p>
+ <h3>Why markets care</h3>
+ <p>The outcome feeds directly into three things investors are already worried about: tech supply chains (especially anything relying on rare earths), inflation (tariffs raise import costs), and the performance of US and Chinese stocks. A deal could support the rally; a breakdown could reverse it quickly.</p></div>
+      <div class="article-callout"><div class="article-callout-title">What to watch</div><p>Pay attention to three signals: whether the truce is extended, whether the $30 billion framework is announced, and how rare earth exports are handled. Then watch how chip stocks and the dollar react. Trade policy is a great example of how politics shows up in prices — a useful story to bring up in interviews.</p></div>
+      <div class="sources-bar"><span class="sources-label">Sources</span><span class="source-tag">Reuters</span><span class="source-tag">Euronews</span></div>
+      <div class="article-nav">
+        <a href="#article-markets" onclick="openArticle(event,'article-markets')">Previous: Monday’s rally</a>
+        <a href="#article-oil" onclick="openArticle(event,'article-oil')">Next: Oil below $100</a>
+      </div>
+    </article>
+  </div>
+
+  <div id="article-oil" class="page article-page">
+    <article class="article">
+      <button class="back-btn" onclick="goHome(event)">← Back to Top Stories</button>
+      <div class="article-kicker">Oil · Easing</div>
+      <h1 class="article-headline">Brent Crude Falls Below $100 for First Time in Weeks</h1>
+      <p class="article-deck">Four straight days of falling prices, driven by diplomatic progress in the Iran conflict, are easing inflation pressure around the world.</p>
+      <div class="article-byline">By <strong>Aman Lathiya</strong>, Secretary &nbsp;·&nbsp; Finance Club NYC &nbsp;·&nbsp; September 21, 2026</div>
+      <div class="article-stats"><div class="article-stat"><div class="article-stat-val">$99.80</div><div class="article-stat-label">Brent crude per barrel</div></div><div class="article-stat"><div class="article-stat-val">4 days</div><div class="article-stat-label">Consecutive declines</div></div><div class="article-stat"><div class="article-stat-val">3.4%</div><div class="article-stat-label">US inflation it's feeding into</div></div><div class="article-stat"><div class="article-stat-val">Hormuz</div><div class="article-stat-label">Key shipping route reopening</div></div></div>
+      <div class="article-body"><p>Brent crude, the global oil benchmark, has fallen for four consecutive sessions and slipped below $100 a barrel to $99.80 — the first time in weeks it's been under that level.</p>
+ <h3>Why prices are falling</h3>
+ <p>Two things are driving the drop: diplomatic progress in the Iran conflict, and improved tanker flows through the Strait of Hormuz. Hormuz is a narrow waterway between Iran and Oman that a large share of the world's seaborne oil passes through, so any disruption there sends prices up fast — and any easing brings them down.</p>
+ <h3>The inflation connection</h3>
+ <p>Energy prices have been one of the main reasons inflation has stayed stuck at 3.4%, forcing the Fed to raise rates last week. Cheaper oil lowers costs for transportation, shipping, and manufacturing, which can cool inflation across the whole economy. That's why the stock market rallied on Monday as oil fell.</p>
+ <h3>Winners and losers</h3>
+ <p>Energy stocks are falling along with oil prices. On the other side, consumers, airlines, and rate-sensitive sectors like tech benefit, since lower oil makes further aggressive Fed hikes less likely.</p></div>
+      <div class="article-callout"><div class="article-callout-title">What this means for you</div><p>Lower oil usually shows up at the gas pump within a few weeks. For investors, it's a reminder that one commodity can move inflation, interest rates, and stock prices all at once. If diplomacy stalls and prices jump back above $100, expect the opposite reaction.</p></div>
+      <div class="sources-bar"><span class="sources-label">Sources</span><span class="source-tag">Bloomberg</span><span class="source-tag">Reuters</span><span class="source-tag">Tickmill</span></div>
+      <div class="article-nav">
+        <a href="#article-summit" onclick="openArticle(event,'article-summit')">Previous: Trump-Xi summit</a>
+        <a href="#article-fed" onclick="openArticle(event,'article-fed')">Next: The Fed hike</a>
+      </div>
+    </article>
+  </div>
+
+  <!-- ═══════════════════ MARKET EXPLAINERS ═══════════════════ -->
+  <div id="article-equities" class="page article-page">
+    <article class="article">
+      <button class="back-btn" onclick="goTo(event,'markets')">← Back to Markets</button>
+      <div class="article-kicker">Markets · Equities</div>
+      <h1 class="article-headline">Stocks: What Moved and Why It Matters</h1>
+      <p class="article-deck">A quick guide to the three big US indexes, what last week's selloff and Monday's bounce actually tell us, and how to read them yourself.</p>
+      <div class="article-byline">By <strong>Aman Lathiya</strong>, Secretary &nbsp;·&nbsp; Finance Club NYC &nbsp;·&nbsp; September 21, 2026</div>
+      <div class="article-stats"><div class="article-stat"><div class="article-stat-val">7,767</div><div class="article-stat-label">S&P 500 (+1.6%)</div></div><div class="article-stat"><div class="article-stat-val">27,139</div><div class="article-stat-label">Nasdaq (+2.3%)</div></div><div class="article-stat"><div class="article-stat-val">41,080</div><div class="article-stat-label">Dow (−0.1%)</div></div><div class="article-stat"><div class="article-stat-val">7,816</div><div class="article-stat-label">S&P all-time high (June 1)</div></div></div>
+      <div class="article-body"><p>Stocks sold off after the Fed's September 16 hike, with the S&P 500 slipping about 0.5% to around 7,650. On Monday they bounced hard: the S&P 500 rose 1.6% to 7,767 and the Nasdaq gained 2.3% to 27,139. The Dow was the odd one out, down 0.1% at 41,080.</p>
+ <h3>Three indexes, three different stories</h3>
+ <p>The <strong>S&P 500</strong> tracks 500 large US companies weighted by market value, so it's the best single read on the overall market. The <strong>Nasdaq Composite</strong> leans heavily toward tech, which is why it moves more on days when chips and software rally. The <strong>Dow</strong> holds just 30 stocks and is weighted by share price, not company size, so a few expensive stocks can move it a lot. That's how the Dow can fall on a day the other two rise.</p>
+ <h3>Why tech led the bounce</h3>
+ <p>Tech companies are valued on profits expected years from now. When inflation fears ease, investors expect fewer rate hikes, and those future profits are worth more today. Falling oil did exactly that on Monday. META rallied ahead of its developers forum, and chipmakers Intel, AMD, and ARM posted big gains.</p>
+ <h3>Who got left behind</h3>
+ <p>Energy stocks fell with oil. Financials are still under pressure after Bank of America, Goldman Sachs, and Morgan Stanley warned that Q3 investment banking fees would come in below expectations, dragging the sector down 2.3% last week.</p>
+ <h3>What to watch next</h3>
+ <p>The S&P 500 sits about 0.6% below its June 1 record of 7,816. Whether it breaks through depends on oil, the Trump-Xi summit outcome, and whether the Fed's next move stays at 25bps.</p></div>
+      <div class="article-callout"><div class="article-callout-title">Try this yourself</div><p>Pick one day this week and check all three indexes plus the sector breakdown on a site like Yahoo Finance or the NYIT Bloomberg Terminal. Write one sentence on why they moved differently. Doing this weekly builds exactly the market sense interviewers test for.</p></div>
+      <div class="sources-bar"><span class="sources-label">Sources</span><span class="source-tag">CNBC</span><span class="source-tag">Bloomberg</span><span class="source-tag">Investrade</span></div>
+      <div class="article-nav">
+        <a href="#article-commodities" onclick="openArticle(event,'article-commodities','markets')">Previous: Commodities & crypto</a>
+        <a href="#article-rates" onclick="openArticle(event,'article-rates','markets')">Next: Fixed income & rates</a>
+      </div>
+    </article>
+  </div>
+
+  <div id="article-rates" class="page article-page">
+    <article class="article">
+      <button class="back-btn" onclick="goTo(event,'markets')">← Back to Markets</button>
+      <div class="article-kicker">Markets · Fixed Income & Rates</div>
+      <h1 class="article-headline">Rates 101: The Fed Hike, Treasury Yields, and the Yield Curve</h1>
+      <p class="article-deck">The Fed just started a new tightening cycle. Here's how the fed funds rate, the 10-year Treasury, and the yield curve fit together.</p>
+      <div class="article-byline">By <strong>Aman Lathiya</strong>, Secretary &nbsp;·&nbsp; Finance Club NYC &nbsp;·&nbsp; September 21, 2026</div>
+      <div class="article-stats"><div class="article-stat"><div class="article-stat-val">3.75–4.00%</div><div class="article-stat-label">Fed funds range</div></div><div class="article-stat"><div class="article-stat-val">~4.98%</div><div class="article-stat-label">10-year Treasury</div></div><div class="article-stat"><div class="article-stat-val">4.125%</div><div class="article-stat-label">Year-end median (dot plot)</div></div><div class="article-stat"><div class="article-stat-val">88%</div><div class="article-stat-label">Odds of a Q4 hike</div></div></div>
+      <div class="article-body"><p>On September 16 the Fed raised its target range by 25 basis points to 3.75–4.00%, its first hike since July 2023. The 10-year Treasury yield touched 5% last week before easing to around 4.98% on Monday as oil fell.</p>
+ <h3>Fed funds rate vs. the 10-year yield</h3>
+ <p>The <strong>fed funds rate</strong> is the overnight rate banks charge each other, and the Fed sets it directly. The <strong>10-year Treasury yield</strong> is set by the market. It reflects where investors think short rates, inflation, and growth are heading over the next decade. That's why the 10-year can fall on the same week the Fed hikes, if investors think the hikes will bring inflation down.</p>
+ <h3>Why bond prices fall when yields rise</h3>
+ <p>A bond pays a fixed coupon. If new bonds start paying more, your older, lower-paying bond is less attractive, so its price drops until its yield matches the market. Rising yields always mean falling prices for existing bonds. It's one of the most common interview questions out there.</p>
+ <h3>The yield curve</h3>
+ <p>The yield curve plots yields from short-term to long-term Treasuries. Normally longer bonds pay more. Right now the curve is slightly inverted, meaning some short-term yields sit above longer ones. Historically that's been read as a warning sign for slower growth, though it's not a perfect predictor.</p>
+ <h3>What the dot plot tells us</h3>
+ <p>The median projection of 4.125% for year-end implies one more 25bps hike. Markets price roughly an 88% chance of that happening in Q4. Inflation at 3.4% and core PCE at 3.7% are the reasons.</p></div>
+      <div class="article-callout"><div class="article-callout-title">What this means for you</div><p>Variable-rate debt like credit cards gets more expensive right away. Savings accounts and CDs pay more. And if you’re recruiting, be ready to explain the price-yield relationship and what an inverted curve signals. Those two come up constantly.</p></div>
+      <div class="sources-bar"><span class="sources-label">Sources</span><span class="source-tag">Bloomberg</span><span class="source-tag">JP Morgan Wealth Mgmt</span><span class="source-tag">Reuters</span><span class="source-tag">Kiplinger</span></div>
+      <div class="article-nav">
+        <a href="#article-equities" onclick="openArticle(event,'article-equities','markets')">Previous: Equities</a>
+        <a href="#article-fx" onclick="openArticle(event,'article-fx','markets')">Next: Foreign exchange</a>
+      </div>
+    </article>
+  </div>
+
+  <div id="article-fx" class="page article-page">
+    <article class="article">
+      <button class="back-btn" onclick="goTo(event,'markets')">← Back to Markets</button>
+      <div class="article-kicker">Markets · Foreign Exchange</div>
+      <h1 class="article-headline">Currencies: Why the Dollar Got Stronger and the Yen Didn’t</h1>
+      <p class="article-deck">Higher US rates pulled money into the dollar last week, while Japan’s own rate hike surprised everyone by weakening the yen.</p>
+      <div class="article-byline">By <strong>Aman Lathiya</strong>, Secretary &nbsp;·&nbsp; Finance Club NYC &nbsp;·&nbsp; September 21, 2026</div>
+      <div class="article-stats"><div class="article-stat"><div class="article-stat-val">0.918</div><div class="article-stat-label">USD / EUR (−0.2%)</div></div><div class="article-stat"><div class="article-stat-val">0.789</div><div class="article-stat-label">USD / GBP (flat)</div></div><div class="article-stat"><div class="article-stat-val">150.25</div><div class="article-stat-label">USD / JPY (+0.3%)</div></div><div class="article-stat"><div class="article-stat-val">+0.9%</div><div class="article-stat-label">DXY last week</div></div></div>
+      <div class="article-body"><p>The dollar gained 0.9% on the DXY index last week after the Fed hike. On Monday USD/EUR slipped 0.2% to 0.918, USD/GBP was flat at 0.789, and USD/JPY rose 0.3% to 150.25.</p>
+ <h3>How to read a currency quote</h3>
+ <p>USD/JPY at 150.25 means one US dollar buys 150.25 yen. If that number goes up, the dollar is strengthening against the yen. The <strong>DXY</strong> is an index measuring the dollar against a basket of major currencies, led by the euro, so it's the quickest way to see the dollar's overall direction.</p>
+ <h3>Why rate hikes strengthen a currency</h3>
+ <p>Money flows to where it earns more. When the Fed raises rates, holding dollars and dollar assets pays better, so global investors buy dollars. That demand pushes the dollar up.</p>
+ <h3>The yen puzzle</h3>
+ <p>The Bank of Japan raised its rate to 1.25%, its highest since 1995, yet the yen fell. The gap still matters more than the move: even after the hike, Japanese rates are far below US rates, so the incentive to hold dollars over yen barely changed. Markets had also largely expected the hike already.</p>
+ <h3>The 155 line</h3>
+ <p>Traders are watching USD/JPY near 155. Japan has stepped into currency markets before to slow a falling yen, and a move toward that level raises the odds of it happening again.</p></div>
+      <div class="article-callout"><div class="article-callout-title">Why this matters</div><p>A strong dollar makes US exports pricier abroad and imports cheaper at home. It also hurts US companies that earn a lot overseas, since foreign sales convert into fewer dollars. Understanding that link between rates, currencies, and earnings is a big plus for any markets or corporate finance role.</p></div>
+      <div class="sources-bar"><span class="sources-label">Sources</span><span class="source-tag">Bloomberg</span><span class="source-tag">Tickmill</span><span class="source-tag">Morningstar</span></div>
+      <div class="article-nav">
+        <a href="#article-rates" onclick="openArticle(event,'article-rates','markets')">Previous: Fixed income & rates</a>
+        <a href="#article-commodities" onclick="openArticle(event,'article-commodities','markets')">Next: Commodities & crypto</a>
+      </div>
+    </article>
+  </div>
+
+  <div id="article-commodities" class="page article-page">
+    <article class="article">
+      <button class="back-btn" onclick="goTo(event,'markets')">← Back to Markets</button>
+      <div class="article-kicker">Markets · Commodities & Crypto</div>
+      <h1 class="article-headline">Oil, Gold, and Bitcoin: Reading the Commodity Signals</h1>
+      <p class="article-deck">Oil is the biggest macro story right now. Here's how it connects to inflation, and why gold and crypto moved the way they did.</p>
+      <div class="article-byline">By <strong>Aman Lathiya</strong>, Secretary &nbsp;·&nbsp; Finance Club NYC &nbsp;·&nbsp; September 21, 2026</div>
+      <div class="article-stats"><div class="article-stat"><div class="article-stat-val">$99.80</div><div class="article-stat-label">Brent crude / bbl</div></div><div class="article-stat"><div class="article-stat-val">4 days</div><div class="article-stat-label">Of falling oil</div></div><div class="article-stat"><div class="article-stat-val">$63,400</div><div class="article-stat-label">Bitcoin (+1.1%)</div></div><div class="article-stat"><div class="article-stat-val">$2,450</div><div class="article-stat-label">Ethereum (+0.8%)</div></div></div>
+      <div class="article-body"><p>Brent crude fell for a fourth straight session to $99.80, dropping below $100 for the first time in weeks. Diplomatic progress in the Iran conflict and better tanker flows through the Strait of Hormuz are behind the decline.</p>
+ <h3>Brent vs. WTI</h3>
+ <p><strong>Brent</strong> is the global benchmark, priced off North Sea crude. <strong>WTI</strong> is the US benchmark, priced at Cushing, Oklahoma. Brent reacts more to Middle East supply risk because so much seaborne oil moves through Hormuz, which helps explain why the gap between the two is wide right now.</p>
+ <h3>Why oil drives inflation</h3>
+ <p>Oil feeds into almost everything: gas, shipping, plane tickets, plastics, and manufacturing. When it stays high, inflation stays sticky, and the Fed keeps hiking. When it falls, the pressure eases. That chain is why stocks rallied on Monday as oil dropped.</p>
+ <h3>Why gold fell after the hike</h3>
+ <p>Gold pays no interest. When real rates (interest rates minus inflation) rise, holding cash or bonds becomes more rewarding than holding gold, so gold tends to slip. That's what happened after the Fed's move.</p>
+ <h3>Crypto as a risk asset</h3>
+ <p>Bitcoin rose 1.1% to $63,400 and Ethereum 0.8% to $2,450 on Monday, moving in step with tech stocks. Lately crypto has traded more like a high-risk growth asset than a hedge, rising when investors feel confident and falling when they don't.</p></div>
+      <div class="article-callout"><div class="article-callout-title">What to watch</div><p>If diplomacy stalls and Brent jumps back above $100, expect inflation worries, and pressure on stocks, to return. Watch gas prices over the next few weeks too; they usually follow crude with a short lag.</p></div>
+      <div class="sources-bar"><span class="sources-label">Sources</span><span class="source-tag">Bloomberg</span><span class="source-tag">Reuters</span><span class="source-tag">Tickmill</span></div>
+      <div class="article-nav">
+        <a href="#article-fx" onclick="openArticle(event,'article-fx','markets')">Previous: Foreign exchange</a>
+        <a href="#article-equities" onclick="openArticle(event,'article-equities','markets')">Next: Equities</a>
+      </div>
+    </article>
+  </div>
+
+  <!-- ═══════════════════ MARKETS ═══════════════════ -->
+  <div id="markets" class="page">
+
+    <div class="sec-head" style="margin-top:0"><div class="sec-head-text">Markets Deep Dive — September 21, 2026</div><div class="sec-head-line"></div></div>
+
+    <div class="breaking">
+      <span class="breaking-label">Live</span>
+      <span class="breaking-text">All data as of market close Monday, September 21, 2026. S&P 500 at 7,767 (+1.6%) — approaching all-time highs of 7,816 set June 1.</span>
+    </div>
+
+    <div class="markets-grid">
+
+      <div class="mcard">
+        <div class="mcard-title"><span class="mcard-icon">📈</span> Equities</div>
+        <div class="mcard-stat"><span class="mcard-label">S&P 500</span><span><span class="mcard-value">7,767</span> &nbsp;<span class="mcard-chg up">+1.6%</span></span></div>
+        <div class="mcard-stat"><span class="mcard-label">NASDAQ Comp.</span><span><span class="mcard-value">27,139</span> &nbsp;<span class="mcard-chg up">+2.3%</span></span></div>
+        <div class="mcard-stat"><span class="mcard-label">Dow Jones</span><span><span class="mcard-value">41,080</span> &nbsp;<span class="mcard-chg dn">−0.1%</span></span></div>
+        <div class="mcard-stat"><span class="mcard-label">Week-ago S&P</span><span><span class="mcard-value">~7,650</span> &nbsp;<span class="mcard-chg dn">−0.5% post-Fed</span></span></div>
+        <div class="mcard-desc">Stocks are staging a strong Monday recovery after last week's Fed-driven selloff. Tech and communication services are leading, while energy stocks are falling as oil retreats. The S&P 500 is approaching its all-time high of 7,816 set on June 1st. The big driver today: falling oil prices easing inflation fears, plus optimism ahead of the Trump-Xi summit Wednesday.</div>
+        <button class="mcard-btn" onclick="openArticle(event,'article-equities','markets')" aria-label="Learn more about equities">Learn More →</button>
+      </div>
+
+      <div class="mcard">
+        <div class="mcard-title"><span class="mcard-icon">🏦</span> Fixed Income &amp; Rates</div>
+        <div class="mcard-stat"><span class="mcard-label">Fed Funds Rate</span><span><span class="mcard-value">3.75–4.00%</span> &nbsp;<span class="mcard-chg dn">▲ Hiked Sept 16</span></span></div>
+        <div class="mcard-stat"><span class="mcard-label">10-Year Treasury</span><span><span class="mcard-value">~4.98%</span> &nbsp;<span class="mcard-chg up">▼ easing today</span></span></div>
+        <div class="mcard-stat"><span class="mcard-label">Next Hike Expected</span><span><span class="mcard-value">Q4 2026</span> &nbsp;<span class="mcard-chg fl">88% probability</span></span></div>
+        <div class="mcard-stat"><span class="mcard-label">Yield Curve</span><span><span class="mcard-value">Slight inversion</span> &nbsp;<span class="mcard-chg fl">—</span></span></div>
+        <div class="mcard-desc">The Fed just delivered its first rate hike since July 2023 — a unanimous 25bps increase. The 10-year Treasury yield hit 5% last week before easing today as oil fell. The Fed's new dot plot signals rates could reach 4.125% by year end, meaning at least one more hike is coming. For students: this raises costs on credit cards, auto loans, and student loans — and affects how companies value stocks.</div>
+        <button class="mcard-btn" onclick="openArticle(event,'article-rates','markets')" aria-label="Learn more about fixed income and rates">Learn More →</button>
+      </div>
+
+      <div class="mcard">
+        <div class="mcard-title"><span class="mcard-icon">🌐</span> Foreign Exchange</div>
+        <div class="mcard-stat"><span class="mcard-label">USD / EUR</span><span><span class="mcard-value">0.918</span> &nbsp;<span class="mcard-chg dn">▼ −0.2%</span></span></div>
+        <div class="mcard-stat"><span class="mcard-label">USD / GBP</span><span><span class="mcard-value">0.789</span> &nbsp;<span class="mcard-chg fl">— flat</span></span></div>
+        <div class="mcard-stat"><span class="mcard-label">USD / JPY</span><span><span class="mcard-value">150.25</span> &nbsp;<span class="mcard-chg up">▲ +0.3%</span></span></div>
+        <div class="mcard-stat"><span class="mcard-label">Dollar Index (DXY)</span><span><span class="mcard-value">+0.9% last week</span> &nbsp;<span class="mcard-chg up">▲ strong</span></span></div>
+        <div class="mcard-desc">The US dollar strengthened significantly last week after the Fed's rate hike, gaining 0.9% on the DXY index. Interestingly, the Japanese yen fell even after the Bank of Japan raised its own rates to 1.25% — the highest since 1995. A stronger dollar makes US exports more expensive and imports cheaper. Watch USD/JPY closely; if it hits 155, the BoJ may intervene in currency markets, which affects global investors.</div>
+        <button class="mcard-btn" onclick="openArticle(event,'article-fx','markets')" aria-label="Learn more about foreign exchange">Learn More →</button>
+      </div>
+
+      <div class="mcard">
+        <div class="mcard-title"><span class="mcard-icon">🛢️</span> Commodities &amp; Crypto</div>
+        <div class="mcard-stat"><span class="mcard-label">Brent Crude</span><span><span class="mcard-value">$99.80/bbl</span> &nbsp;<span class="mcard-chg up">▼ 4th day falling</span></span></div>
+        <div class="mcard-stat"><span class="mcard-label">WTI Oil</span><span><span class="mcard-value">$78/bbl</span> &nbsp;<span class="mcard-chg fl">— no change</span></span></div>
+        <div class="mcard-stat"><span class="mcard-label">Bitcoin (BTC)</span><span><span class="mcard-value">$63,400</span> &nbsp;<span class="mcard-chg up">▲ +1.1%</span></span></div>
+        <div class="mcard-stat"><span class="mcard-label">Ethereum (ETH)</span><span><span class="mcard-value">$2,450</span> &nbsp;<span class="mcard-chg up">▲ +0.8%</span></span></div>
+        <div class="mcard-desc">Oil is the single biggest macro story right now. Brent crude has fallen for four consecutive sessions and is now below $100 — driven by diplomatic progress in the Iran conflict and improved tanker flows through the Strait of Hormuz. This is directly reducing inflation pressure. Crypto is gaining alongside risk assets today, with Bitcoin up 1.1%. Gold fell after the Fed hike — typical behavior when real rates rise, since gold pays no interest.</div>
+        <button class="mcard-btn" onclick="openArticle(event,'article-commodities','markets')" aria-label="Learn more about commodities and crypto">Learn More →</button>
+      </div>
+
+    </div>
+
+    <div class="sec-head"><div class="sec-head-text">What This Means for Finance Students</div><div class="sec-head-line"></div></div>
+    <div style="background:var(--white);border:1px solid var(--rule);border-radius:var(--radius);padding:20px 22px;margin-bottom:28px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Rate Hike Impact on You</div>
+          <div style="font-size:13px;color:var(--ink-soft);line-height:1.7;">Higher fed funds rate = more expensive borrowing. Credit card interest rates go up. Student loan refinancing gets pricier. But savings account and CD yields also rise — if you have money sitting in a savings account, now is a good time to shop for a high-yield account. This is exactly what the Fed wants: slow down spending, reduce inflation.</div>
+        </div>
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Career Implications</div>
+          <div style="font-size:13px;color:var(--ink-soft);line-height:1.7;">Investment banking deal flow slows when rates are high — confirmed by weak Q3 fee guidance from Goldman Sachs and Bank of America. But fixed income desks, rates trading, and credit analysis roles become more active. If you're recruiting, highlight your understanding of interest rate environments. It's the hottest topic in every finance interview right now.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sources-bar">
+      <span class="sources-label">Sources</span>
+      <span class="source-tag">Bloomberg</span>
+      <span class="source-tag">JP Morgan Wealth Mgmt</span>
+      <span class="source-tag">Investrade</span>
+      <span class="source-tag">Tickmill</span>
+      <span class="source-tag">Reuters</span>
+      <span class="source-tag">Kiplinger</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ OPPORTUNITIES ═══════════════════ -->
+  <div id="opportunities" class="page">
+    <div class="sec-head" style="margin-top:0"><div class="sec-head-text">Opportunity Corner</div><div class="sec-head-line"></div></div>
+    <div class="opp-grid">
+      <a class="opp-card" href="https://campus.bankofamerica.com/" target="_blank" rel="noopener"><div class="opp-badge">Internship</div><div class="opp-title">Bank of America — Global IB Summer Analyst 2027</div><div class="opp-sub">Investment Banking · NYC · Search "Summer Analyst" on the BofA campus portal</div><div class="opp-cta">Apply at BofA Campus ↗</div></a>
+      <a class="opp-card" href="https://home.barclays/careers/" target="_blank" rel="noopener"><div class="opp-badge">Internship</div><div class="opp-title">Barclays — Banking Analyst Summer 2027</div><div class="opp-sub">Investment Banking · Chicago & NYC · Go to Early Careers, then Summer Internships</div><div class="opp-cta">Apply at Barclays Careers ↗</div></a>
+      <a class="opp-card" href="https://portal.bloombergforeducation.com/" target="_blank" rel="noopener"><div class="opp-badge">Certification</div><div class="opp-title">Bloomberg Market Concepts (BMC)</div><div class="opp-sub">Free 8–12 hr cert · Economics, currencies, fixed income & equities · Free on the NYIT Bloomberg Terminal</div><div class="opp-cta">Start on Bloomberg for Education ↗</div></a>
+      <a class="opp-card" href="https://portal.bloombergforeducation.com/" target="_blank" rel="noopener"><div class="opp-badge">Certification</div><div class="opp-title">Bloomberg ESG Certification</div><div class="opp-sub">Sustainable finance credential · Growing demand · Free on the NYIT Bloomberg Terminal</div><div class="opp-cta">Start on Bloomberg for Education ↗</div></a>
+      <a class="opp-card" href="https://store.wsj.com/" target="_blank" rel="noopener"><div class="opp-badge">Student Deal</div><div class="opp-title">Wall Street Journal — Student Plan</div><div class="opp-sub">Discounted digital access for students · Choose the student offer and verify with your .edu email</div><div class="opp-cta">See WSJ student offers ↗</div></a>
+      <div class="opp-card"><div class="opp-badge">Resource</div><div class="opp-title">CFA Level I Study Materials</div><div class="opp-sub">Check the NYIT library for prep books · Start building toward the gold standard in investment credentials</div><div class="opp-cta-row"><a href="https://www.cfainstitute.org/programs/cfa-program" target="_blank" rel="noopener">CFA Program ↗</a><a href="https://www.nyit.edu/library" target="_blank" rel="noopener">NYIT Library ↗</a></div></div>
+    </div>
+    <p class="opp-note">Links open in a new tab. Deadlines and availability change often, so confirm details on each site before applying. Know an opportunity we missed? <a href="mailto:financenyc@nyit.edu?subject=Opportunity for The Finance Ledger" style="color:var(--primary)">Send it to us</a>.</p>
+  </div>
+
+  <!-- ═══════════════════ CLUB EVENTS ═══════════════════ -->
+  <div id="club-events" class="page">
+    <div class="sec-head" style="margin-top:0"><div class="sec-head-text">Club Events — Fall 2026</div><div class="sec-head-line"></div></div>
+    <div class="update-box">
+      <div class="update-title">Fall 2026 Event Calendar</div>
+      <div class="update-body">
+        <div class="event-row"><span class="event-date">TBA · Oct</span><div><div class="event-name">General Body Meeting (GBM) — Kickoff</div><div class="event-loc">16 West, 11th Floor · Free Hours (12:45–2:00 PM) · Open to all SOM students</div></div></div>
+        <div class="event-row"><span class="event-date">TBA · Oct</span><div><div class="event-name">Financial Literacy 101 — Money Skills for Every Student</div><div class="event-loc">16 West, 11th Floor · Hosted by Aman Lathiya, Secretary</div></div></div>
+        <div class="event-row"><span class="event-date">TBA · Nov</span><div><div class="event-name">Beginner Python for Finance Workshop</div><div class="event-loc">In collaboration with SWE & SHPE · Hosted by Lily</div></div></div>
+        <div class="event-row"><span class="event-date">Nov 24</span><div><div class="event-name">Panel Discussion with Alumni & Industry Professionals</div><div class="event-loc">16 West, 11th Floor · 12:45–2:00 PM · Drinks & refreshments provided</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ SPOTLIGHT ═══════════════════ -->
+  <div id="spotlight" class="page">
+    <div class="sec-head" style="margin-top:0"><div class="sec-head-text">Member Spotlight</div><div class="sec-head-line"></div></div>
+    <div class="spotlight">
+      <div class="avatar">AL</div>
+      <div>
+        <div class="spot-name">Aman Lathiya</div>
+        <div class="spot-role">Secretary, Finance Club NYC &nbsp;·&nbsp; Finance Student, NYIT &nbsp;·&nbsp; GIA Graduate Diamond Diploma</div>
+        <div class="spot-bio">Aman brings a rare mix of finance and the fine gemstone trade to the Finance Club e-board. Working in New York's Diamond District and holding a GIA Graduate Diamond Diploma, he understands commodity markets and valuation from the inside. As Secretary, he handles official records, club correspondence, and Campus Groups — and is the founder of The Finance Ledger.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ FINANCE TIP ═══════════════════ -->
+  <div id="finance-tip" class="page">
+    <div class="sec-head" style="margin-top:0"><div class="sec-head-text">Finance Tip of the Month</div><div class="sec-head-line"></div></div>
+    <div class="tip-box">
+      <div class="tip-num">#1</div>
+      <div>
+        <div class="tip-label">September 2026 — Rates are Rising</div>
+        <div class="tip-text">"Start tracking your net worth right now — even if the number is small or negative. Assets minus liabilities, updated once a month in a spreadsheet. With the Fed raising rates, high-yield savings accounts are finally paying real returns — move your idle cash there. And if you have variable-rate debt, pay it down aggressively before rates rise further. The habits you build now compound faster than you think."</div>
+      </div>
+    </div>
+
+    <div class="sec-head"><div class="sec-head-text">Ask the Ledger</div><div class="sec-head-line"></div></div>
+    <div class="ask" id="ask-the-ledger">
+      <div class="ask-title">Got a finance question? Want to share your take?</div>
+      <p class="ask-intro">Send us anything about money, markets, careers, or this month's news. Confused about the Fed hike? Wondering how to start investing, or how to prep for a finance interview? Disagree with something we wrote? We'll answer the best questions and feature student opinions in next month's issue.</p>
+      <div class="ask-form">
+        <div class="ask-field full">
+          <label>What are you sending?</label>
+          <div class="ask-type" role="radiogroup">
+            <input type="radio" name="ask-kind" id="kind-q" value="Question" checked><label for="kind-q">A question</label>
+            <input type="radio" name="ask-kind" id="kind-o" value="Opinion"><label for="kind-o">An opinion</label>
+          </div>
+        </div>
+        <div class="ask-field">
+          <label for="ask-name">Name <span class="hint">(optional)</span></label>
+          <input type="text" id="ask-name" placeholder="First name is fine">
+        </div>
+        <div class="ask-field">
+          <label for="ask-topic">Topic</label>
+          <select id="ask-topic">
+            <option>Personal finance &amp; budgeting</option>
+            <option>Investing &amp; the stock market</option>
+            <option>Interest rates &amp; the economy</option>
+            <option>Careers, internships &amp; interviews</option>
+            <option>Crypto &amp; alternative assets</option>
+            <option>Something in this issue</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="ask-field full">
+          <label for="ask-msg" id="ask-msg-label">Your question</label>
+          <textarea id="ask-msg" placeholder="e.g. Should I pay off my credit card first or start investing?"></textarea>
+        </div>
+        <div class="ask-field full">
+          <label class="ask-check"><input type="checkbox" id="ask-anon"> Keep me anonymous if this gets published</label>
+        </div>
+        <div class="ask-actions">
+          <button class="ask-submit" type="button" onclick="sendAsk()">Send to the Ledger</button>
+          <span class="ask-status" id="ask-status" role="status"></span>
+        </div>
+      </div>
+      <p class="ask-foot">This opens your email app with your message ready to send to financenyc@nyit.edu. Answers are for learning, not personal financial advice.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <div class="footer-inner">
+    <div>
+      <a href="#top-stories" class="footer-brand home-link" onclick="goHome(event)" title="Go to Top Stories">The Finance Ledger</a>
+      <div class="footer-sub">Finance Club NYC &nbsp;·&nbsp; New York Institute of Technology &nbsp;·&nbsp; School of Management &nbsp;·&nbsp; Published monthly</div>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:financenyc@nyit.edu?subject=Story Submission for The Finance Ledger">Submit a Story</a>
+      <a href="mailto:financenyc@nyit.edu?subject=Contact - The Finance Ledger">Contact</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showPage(id, el) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('on'));
+    document.getElementById(id).classList.add('active');
+    el.classList.add('on');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  // Open a full article. navId = the nav tab that stays highlighted (default: Top Stories)
+  function openArticle(e, id, navId) {
+    if (e) e.preventDefault();
+    navId = navId || 'top-stories';
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.toggle('on', n.dataset.page === navId));
+    history.replaceState(null, '', '#' + id);
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  // Jump to a main section by id (used by "Back to Markets")
+  function goTo(e, id) {
+    if (e) e.preventDefault();
+    showPage(id, document.querySelector('.nav-item[data-page="' + id + '"]'));
+  }
+
+  // Clicking "The Finance Ledger" (masthead or footer) returns to Top Stories
+  function goHome(e) {
+    if (e) e.preventDefault();
+    const firstTab = document.querySelector('.nav-item');
+    showPage('top-stories', firstTab);
+    firstTab.scrollIntoView({block: 'nearest', inline: 'start'});
+  }
+
+  // Ask the Ledger: switch label/placeholder between question and opinion
+  document.querySelectorAll('input[name="ask-kind"]').forEach(r => r.addEventListener('change', () => {
+    const q = document.getElementById('kind-q').checked;
+    document.getElementById('ask-msg-label').textContent = q ? 'Your question' : 'Your opinion';
+    document.getElementById('ask-msg').placeholder = q
+      ? 'e.g. Should I pay off my credit card first or start investing?'
+      : 'e.g. I think the Fed is hiking too fast because...';
+  }));
+
+  // Ask the Ledger: build the email and open the mail app
+  function sendAsk() {
+    const status = document.getElementById('ask-status');
+    const msg = document.getElementById('ask-msg').value.trim();
+    if (!msg) {
+      status.textContent = 'Write your message first, then send.';
+      status.className = 'ask-status error';
+      document.getElementById('ask-msg').focus();
+      return;
+    }
+    const kind = document.querySelector('input[name="ask-kind"]:checked').value;
+    const name = document.getElementById('ask-name').value.trim() || 'Not given';
+    const topic = document.getElementById('ask-topic').value;
+    const anon = document.getElementById('ask-anon').checked ? 'Yes' : 'No';
+    const subject = 'Ask the Ledger: ' + kind + ' (' + topic + ')';
+    const body = 'Type: ' + kind + '\nTopic: ' + topic + '\nName: ' + name + '\nAnonymous if published: ' + anon + '\n\n' + msg;
+    window.location.href = 'mailto:financenyc@nyit.edu?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    status.textContent = 'Your email app should open now. Hit send there to submit.';
+    status.className = 'ask-status';
+  }
+
+  // Open a page directly from a shared link like ...#article-rates
+  (function () {
+    const id = location.hash.slice(1);
+    const el = id && document.getElementById(id);
+    if (!el || !el.classList.contains('page')) return;
+    if (el.classList.contains('article-page')) {
+      openArticle(null, id, ['article-equities','article-rates','article-fx','article-commodities'].includes(id) ? 'markets' : 'top-stories');
+    } else {
+      goTo(null, id);
+    }
+  })();
+</script>
+</body>
+</html>
